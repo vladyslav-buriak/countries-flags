@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import { ICountries } from "../types";
+import { ICountries } from "../../../types";
 import styled from "styled-components";
-import Card from "./Main/Card";
+import Card from "../Card";
+import {  useNavigate } from "react-router-dom";
 
 const CountriesListInner = styled.div`
   display:flex;
@@ -11,15 +12,14 @@ const CountriesListInner = styled.div`
   cursor:pointer;
 `
 interface CountriesListProps {
-    countries: ICountries[];
+    filterCountries:ICountries[];
 }
-const CountriesList: FC<CountriesListProps> = ({ countries }) => {
+const CountriesList: FC<CountriesListProps> = ({filterCountries }) => {
+    let navigate = useNavigate();
 
     return (
-
         <CountriesListInner>
-            {countries.map((c) => {
-
+            {filterCountries.map((c) => {
                 const countryCard = {
                     url: c.flags.png,
                     name: c.name,
@@ -39,11 +39,10 @@ const CountriesList: FC<CountriesListProps> = ({ countries }) => {
                     ],
                 }
 
-                return <Card key={c.name} countryInfo={countryCard} />
+                return <Card onclick={()=>{navigate(`/info/${c.name}`)}} key={c.name} countryInfo={countryCard} />
 
             })}
         </CountriesListInner>
-
     )
 }
 

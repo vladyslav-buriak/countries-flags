@@ -1,32 +1,25 @@
 import './App.css';
 import Header from './Components/Header';
 import Main from './Components/Main';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { ICountries } from './types';
-import { ALL_COUNTRIES } from './API';
-import axios from 'axios';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import NotFound from './pages/NotFound';
+import Details from './pages/Details';
 
 function App() {
-  const [allCountries, setAllCountries] = useState<ICountries[]>([]);
 
-  useEffect(() => {
-      getAllCountries()
-  }, [])
-
-  async function getAllCountries() {
-      try {
-          await axios.get<ICountries[]>(ALL_COUNTRIES)
-              .then(({ data }) => setAllCountries(data))
-      }
-      catch (e) {
-          console.log(e);
-      }
-  }
   return (
     <>
-      <Header />
-      <Main countries={allCountries} />
+      <BrowserRouter>
+        <Header />
+        <Main >
+        <Routes>
+           <Route path="/" element={<HomePage/>}/>
+           <Route path="*" element={<NotFound/>}/>
+           <Route path="/info/:countryname" element={<Details/>}/>
+         </Routes>
+        </Main>
+      </BrowserRouter>
     </>
   )
 }

@@ -46,12 +46,12 @@ const CardMenuItem = styled.li`
 
 interface infoCardProps {
     countryInfo: IInfoCard;
+    onclick:()=>void;
 }
-const Card: FC<infoCardProps> = ({ countryInfo }) => {
-
+const Card: FC<infoCardProps> = ({ countryInfo ,onclick }) => {
     return (
         <>
-            <CardItem>
+            <CardItem onClick={onclick} >
                 <CardImg src={countryInfo.url} />
                 <CardContent>
                     <CardTitle>{countryInfo.name}</CardTitle>

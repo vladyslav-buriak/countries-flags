@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 
+
 export const CustomSelect = styled(Select).attrs({
     styles: {
         control: (provided) => ({
@@ -16,13 +17,15 @@ export const CustomSelect = styled(Select).attrs({
             padding: '0.325rem',
 
         }),
-        option: (provided) => ({
+        option: (provided, state) => ({
             ...provided,
-            background: 'var(--color-ui-base)',
             fontSize: 'var(--fs-sm)',
             bordeRadius: '0.25rem',
             padding: '0.325rem',
             color: 'var(--colors-text)',
+            backgroundColor: state.isSelected
+                ? 'var(--colors-bg)'
+                : 'var(--colors-ui-base)',
 
         }),
     }

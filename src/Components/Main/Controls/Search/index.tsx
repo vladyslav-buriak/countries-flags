@@ -2,9 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { IoSearchSharp } from "react-icons/io5";
 
-
 const Label = styled.label`
-
     display:flex;
     align-items:center;
     box-shadow:var(--shadow);
@@ -31,11 +29,17 @@ const Input = styled.input.attrs({
     background:inherit;
     width:100%;
 `;
-const Search: FC = () => {
+
+interface ISearchProps {
+    search: string;
+    setSearch: any;
+}
+
+const Search: FC<ISearchProps> = ({ search, setSearch }) => {
     return (
         <Label>
             <IoSearchSharp />
-            <Input />
+            <Input onChange={(e) => { setSearch(e.target.value) }} value={search} />
         </Label>
     )
 }
